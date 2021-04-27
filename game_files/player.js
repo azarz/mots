@@ -11,6 +11,10 @@ function Player (socket, uid) {
     };
 };
 
+Player.prototype.getMonster = function() {
+  return this._playerTinyObject.monster;
+};
+
 Player.prototype.getNick = function () { return (this._playerTinyObject.nick); };
 Player.prototype.setNick = function (nick) {
   this._playerTinyObject.nick = nick;
