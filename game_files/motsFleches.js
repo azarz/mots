@@ -26,6 +26,8 @@ function startGame() {
   delay = (_playersManager.getNumberOfPlayers() > 1) ? TIME_BEFORE_START : 0;
 
   // Change game state
+  _scoreUpdates = [];
+  _foundWords = [];
   _gameState = enums.ServerState.OnGame;
 
   // Send grid to clients
