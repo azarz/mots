@@ -155,8 +155,8 @@ require(['../lib/text!../../conf.json', 'UITools', 'grid', 'chat', 'score'], fun
 
     // Set player's color
     setPlayerColor(monsterNode.style.borderColor);
-    // Send player infos to the server
-    _socket.emit("userIsReady", { nick: nick, monster: monster });
+    // // Send player infos to the server
+    // _socket.emit("userIsReady", { nick: nick, monster: monster });
 
     return (false);
   }
