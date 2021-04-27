@@ -183,7 +183,7 @@ function checkServerCommand(message) {
   // Check the change grid command
   if (message.indexOf('!grid') >= 0) {
     // Retreive grid number and reset game parameters
-    number = parseInt(message.substr(6));
+    number = message.substr(6);
     resetGame(number);
     return (true);
   }
