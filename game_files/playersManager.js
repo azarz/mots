@@ -38,7 +38,9 @@ PlayersManager.prototype.removePlayer = function (player) {
     console.info('It remains ' + _playersList.length + ' player(s)');
   }
 
-  player.getMonster().player = null;
+  if (player.getMonster() !== null) {
+    player.getMonster().player = null;
+  }
 };
 
 PlayersManager.prototype.getPlayerList = function () {
