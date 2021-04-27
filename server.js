@@ -68,20 +68,3 @@ async function onServerReady() {
   // -1 to retreive the day grid, 0 for the default one or any number for a special one
 
 }
-
-/** Get local ip addresses */
-function getLocalIpAddresses() {
-  var ifaces = os.networkInterfaces();
-  var addresses = [];
-
-  Object.keys(ifaces).map(function (ifname) {
-    var alias = 0;
-
-    return ifaces[ifname].map(function (iface) {
-      if (iface.family !== 'IPv4' || iface.internal !== false) return;
-      addresses.push(iface.address);
-    });
-  });
-
-  return addresses;
-}

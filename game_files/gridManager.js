@@ -224,6 +224,8 @@ function getGridAddress(commandArgv) {
     case -1:
       console.info('\n\t[GRIDMANAGER] Load day grid');
       today = new Date();
+      firstDay = new(Date(2015, 0, 1));
+      randomDate = new Date(firstDay.getTime() + Math.random() * (firstDay.getTime() - firstDay.getTime()));
       gridNumber = ("0"+today.getDate()).substr(-2) + ("0"+(today.getMonth()+1)).substr(-2) + (""+today.getFullYear()).substr(-2)
       break;
 
