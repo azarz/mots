@@ -31,7 +31,8 @@ function GridManager() {
     provider: '',
     id:       0,
     level:    0,
-    nbWords:  0
+    nbWords:  0,
+    theme: ''
   };
 }
 
@@ -115,6 +116,8 @@ function parseGrid(callback, serverText) {
 
   grid.nbLines = gamedata.nbcaseshauteur;
   grid.nbColumns = gamedata.nbcaseslargeur;
+
+  _gridInfos.theme = gamedata.legende.split["_"][1] || gamedata.legende;
 
   // Load letters
   for (i in gamedata.grille){

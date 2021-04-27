@@ -145,7 +145,11 @@ define(function () {
     }, 1000);
 
     // Display grid informations
-    document.querySelector('#ig-infos > header').innerHTML = infos.provider + ' ' + infos.id + ' - Niveau ' + infos.level;
+    if (infos.legende === "") {
+      document.querySelector('#ig-infos > header').innerHTML = infos.provider + ' ' + infos.id + ' - Niveau ' + infos.level;
+    } else {
+      document.querySelector('#ig-infos > header').innerHTML = infos.provider + ' ' + infos.id + ' - Niveau ' + infos.level + ' - Thème ' + infos.theme;
+    }
   };
 
   /*
