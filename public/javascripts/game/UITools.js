@@ -24,7 +24,7 @@ define(function () {
 
   function changeGrid() {
     var texteareaNode = document.getElementById('gsc-write'),
-        gridNumber = parseInt(texteareaNode.value);
+        gridNumber = texteareaNode.value;
 
     // If the grid number retreived is not valid, display an informative tooltip
     if (isNaN(gridNumber))
@@ -37,9 +37,9 @@ define(function () {
   }
 
 
-  
+
   /*
-  * Switch game screen to the selected view 
+  * Switch game screen to the selected view
   * @param: {String}  panelName   name of the panel to switch. Node id.
   * @param: {Bool}    isShow      Set if we want show or hide the given panel (true == show)
   */
@@ -57,9 +57,9 @@ define(function () {
         currentOverlayPanel.classList.remove('ui-displayed');
     }
   };
-  
+
   /*
-  * Display the tooltip 
+  * Display the tooltip
   * @param: {Bool}    isShow    Boolean to show or hide the panel (true == show)
   * @param: {String}  htmlText  Text to display
   * @param: {Int}     timeout   [Optional] Time in millisecond before hide the info panel
@@ -119,7 +119,7 @@ define(function () {
 
         if (oldSelection)
           oldSelection.classList.remove('myMonster');
-        
+
         event.srcElement.classList.add('myMonster');
       }
     };
@@ -161,7 +161,7 @@ define(function () {
 
     // Set game over class
     document.querySelector('#ig-infos > header').classList.add('game-over');
-    
+
     // Put winner picture
     gamePanel.innerHTML += '<img id="winner-pic" src="' + winner.monster.path + '" alt="winner picture" />';
     window.setTimeout(function() {
@@ -215,5 +215,5 @@ define(function () {
 
 
   return (UITools);
-  
+
 });
