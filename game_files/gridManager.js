@@ -271,10 +271,10 @@ function placeArrows(grid) {
         case 'o':
         case 'q':
         case 'r':
+        case 's':
           grid.cases[i].arrow[0] = enumArrow.Right;
           grid.cases[i].arrow[1] = enumArrow.BottomRight;
           break;
-        case 's':
         case 't':
         case 'u':
         case 'v':

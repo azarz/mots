@@ -269,6 +269,7 @@ exports.startMflServer = function (server, desiredGrid) {
           });
           _scoreUpdates.forEach(scoreUpdate => {
             socket.emit("score_update", scoreUpdate);
+            _io.sockets.emit("score_update", scoreUpdate);
           });
         }
       });
