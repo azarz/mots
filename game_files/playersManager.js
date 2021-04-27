@@ -37,6 +37,8 @@ PlayersManager.prototype.removePlayer = function (player) {
     _playersList.splice(pos, 1);
     console.info('It remains ' + _playersList.length + ' player(s)');
   }
+
+  player.getMonster().player = null;
 };
 
 PlayersManager.prototype.getPlayerList = function () {
@@ -71,7 +73,7 @@ PlayersManager.prototype.getAvailableMonsters = function () {
 PlayersManager.prototype.setMonsterToPlayer = function (player, monsterId) {
   if ((monsterId > (Monsters.length - 1)) || (Monsters[monsterId].player != null)) {
     console.error('[ERROR] Monster ' + monsterId + ' seems to be unavailable');
-    
+
     // Set the first available monster to this user
     monsterId = 0;
     while (Monsters[monsterId].player != null)
