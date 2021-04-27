@@ -202,6 +202,8 @@ function placeArrows(grid) {
         case 'u':
         case 'v':
         case 'w':
+        case 'x':
+        case 'y':
           grid.cases[i].arrow[0] = enumArrow.RightBottom;
           grid.cases[i].arrow[1] = enumArrow.BottomRight;
           break;
@@ -375,6 +377,7 @@ GridManager.prototype.retreiveAndParseGrid = function (gridNumber, callback) {
     // If an error occurs, raise failure callback
     if (res.statusCode !== 200 && res.statusCode !== 302) {
       onGetGridError(callback, 'Wrong statusCode ' + res.statusCode);
+      return false;
     }
     else {
       // Read server response
@@ -392,7 +395,7 @@ GridManager.prototype.retreiveAndParseGrid = function (gridNumber, callback) {
 
         callback(_grid);
       });
-
+      return true;
     }
 
   });
@@ -400,6 +403,7 @@ GridManager.prototype.retreiveAndParseGrid = function (gridNumber, callback) {
   req.on('error', function (e) {
     // Notify error
     onGetGridError(callback, e.message);
+    return false;
   });
 
 };
@@ -411,15 +415,18 @@ GridManager.prototype.retreiveAndParseGrid = function (gridNumber, callback) {
 */
 GridManager.prototype.resetGrid = function (gridNumber, callback) {
 
-  // Reset important values
-  _grid = _wordsPoints = _theme = null;
-  _nbLetters = _lastSearchCase = _maxPoints = 0;
-  _gridInfos.id = 0;
-  _gridInfos.level = 0;
-  _gridInfos.nbWords = 0;
-
   // Load the grid
-  this.retreiveAndParseGrid(gridNumber, callback);
+  var success = this.retreiveAndParseGrid(gridNumber, callback);
+
+  if (success) {
+    // Reset important values
+    _grid = _wordsPoints = _theme = null;
+    _nbLetters = _lastSearchCase = _maxPoints = 0;
+    _gridInfos.id = 0;
+    _gridInfos.level = 0;
+    _gridInfos.nbWords = 0;
+  }
+
 };
 
 module.exports = GridManager;
