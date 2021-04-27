@@ -430,6 +430,7 @@ GridManager.prototype.resetGrid = function (gridNumber, callback) {
     _gridInfos.id = 0;
     _gridInfos.level = 0;
     _gridInfos.nbWords = 0;
+    _gridInfos.theme = "";
   }
 
 };
