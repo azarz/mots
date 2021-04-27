@@ -104,9 +104,9 @@ function parseGrid(callback, serverText) {
         nbWords: 0,
         cases: []
       };
-  
+
   eval(serverText); // Parse and evaluate js, generate variable gamedata
-  
+
   grid.level = gamedata.force;
   _gridInfos.level = gamedata.force;
 
@@ -251,13 +251,15 @@ function placeArrows(grid) {
         case 'd':
           grid.cases[i].arrow[0] = enumArrow.BottomRight;
           break;
-
+        case 'e':
         case 'f':
         case 'g':
         case 'h':
           grid.cases[i].arrow[0] = enumArrow.Right;
           grid.cases[i].arrow[1] = enumArrow.Bottom;
           break;
+        case 'i':
+        case 'j':
         case 'k':
         case 'l':
         case 'm':
@@ -266,11 +268,15 @@ function placeArrows(grid) {
           grid.cases[i].arrow[1] = enumArrow.Bottom;
           break;
         case 'p':
+        case 'o':
         case 'q':
         case 'r':
           grid.cases[i].arrow[0] = enumArrow.Right;
           grid.cases[i].arrow[1] = enumArrow.BottomRight;
           break;
+        case 's':
+        case 't':
+        case 'u':
         case 'v':
         case 'w':
           grid.cases[i].arrow[0] = enumArrow.RightBottom;
