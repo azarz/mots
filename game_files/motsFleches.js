@@ -26,19 +26,18 @@ function startGame() {
 
   try {
     Grid = _gridManager.getGrid();
+    delay = (_playersManager.getNumberOfPlayers() > 1) ? TIME_BEFORE_START : 0;
+
+    // Change game state
+    _scoreUpdates = [];
+    _foundWords = [];
+    _gameState = enums.ServerState.OnGame;
+
+    // Send grid to clients
+    _io.sockets.emit('grid_event', { grid: Grid, timer: delay } );
   } catch (error) {
-    console.error('\t[ERROR]: No grid loaded');
+    console.error('\t[ERROR]: No grid loaded. Not starting.');
   }
-
-  delay = (_playersManager.getNumberOfPlayers() > 1) ? TIME_BEFORE_START : 0;
-
-  // Change game state
-  _scoreUpdates = [];
-  _foundWords = [];
-  _gameState = enums.ServerState.OnGame;
-
-  // Send grid to clients
-  _io.sockets.emit('grid_event', { grid: Grid, timer: delay } );
 }
 
 function resetGame(gridID) {
