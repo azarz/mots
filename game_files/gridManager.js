@@ -117,7 +117,13 @@ function parseGrid(callback, serverText) {
   grid.nbLines = gamedata.nbcaseshauteur;
   grid.nbColumns = gamedata.nbcaseslargeur;
 
-  _gridInfos.theme = gamedata.legende.split["_"][1] || gamedata.legende;
+  if (gamedata.legende !== "") {
+    try {
+      _gridInfos.theme = gamedata.legende.split["_"][1];
+    } catch (error) {
+      _gridInfos.theme = gamedata.legende;
+    }
+  }
 
   // Load letters
   for (i in gamedata.grille){
