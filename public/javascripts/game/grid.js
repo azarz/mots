@@ -94,10 +94,9 @@ define(['cursor'], function (Cursor) {
       // Insert description and arrow
       descNode.innerHTML = info.desc[i];
       if (info.isThemed && i in info.themed) {
-        descNode.classList.add('themedDescription arrow' + info.arrow[i].toString());
-      } else {
-        descNode.classList.add('arrow' + info.arrow[i].toString());
+        descNode.classList.add('themedDescription');
       }
+      descNode.classList.add('arrow' + info.arrow[i].toString());
 
       frame.appendChild(descNode);
     };
