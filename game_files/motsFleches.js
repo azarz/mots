@@ -4,9 +4,13 @@ var enums           = require('./enums'),
     PlayersManager  = require('./playersManager');
 
 // Defines
-var MAX_PLAYERS   = 4;
+var MAX_PLAYERS   = 8;
 var SERVER_CHAT_COLOR = '#c0392b';
 var TIME_BEFORE_START = 5;
+
+// History
+var _foundWords = [];
+var _scoreUpdates = [];
 
 // Parameters
 var _playersManager,
@@ -47,7 +51,7 @@ function resetGame(gridID) {
     else {
       infos = _gridManager.getGridInfos();
       sendChatMessage('Grille ' + infos.provider + ' ' + infos.id + ' (Niveau ' + infos.level + ') prête !');
-      
+
       // Send reset order to clients
       _io.sockets.emit('grid_reset');
     }
@@ -131,6 +135,7 @@ function checkWord(player, wordObj) {
     // Notify all clients about this word
     wordObj.color = player.getColor();
     _io.sockets.emit('word_founded', wordObj);
+    _foundWords.push(wordObj);
 
     // Check for bonuses
     bonuses = bonusChecker(points, _gridManager.getNbRemainingWords());
@@ -140,7 +145,18 @@ function checkWord(player, wordObj) {
 
     // Update player score and notify clients
     player.updateScore(points + bonuses.points);
-    _io.sockets.emit('score_update', { playerID: player.getID(), score: player.getScore(), words: player.getNbWords(), progress: _gridManager.getAccomplishmentRate(player.getScore(), _playersManager.getNumberOfPlayers()), bonus: bonuses.bonusList } );
+    var scoreUpdate = {
+      playerID: player.getID(),
+      score: player.getScore(),
+      words: player.getNbWords(),
+      progress: _gridManager.getAccomplishmentRate(
+        player.getScore(),
+        _playersManager.getNumberOfPlayers()
+      ),
+      bonus: bonuses.bonusList
+    };
+    _io.sockets.emit("score_update", scoreUpdate);
+    _scoreUpdates.push(scoreUpdate);
 
     if (_gridManager.getNbRemainingWords() <= 0) {
       console.log('[SERVER] Game over ! Sending player\'s notification...');
@@ -161,7 +177,7 @@ function checkServerCommand(message) {
     startGame();
     return (true);
   }
-  
+
   // Check the change grid command
   if (message.indexOf('!grid') >= 0) {
     // Retreive grid number and reset game parameters
@@ -223,11 +239,11 @@ exports.startMflServer = function (server, desiredGrid) {
   _io.sockets.on('connection', function (socket) {
 
     // If it remains slots in the room, add player and bind events
-    if ((_gameState == enums.ServerState.WaitingForPlayers) && (_playersManager.getNumberOfPlayers() < MAX_PLAYERS)) {
-      
+    if (_playersManager.getNumberOfPlayers() < MAX_PLAYERS) {
+
       // Add new player
       var player = _playersManager.addNewPlayer(socket);
-      
+
       // Register to socket events
       socket.on('disconnect', function () {
         // When a player disconnect, retreive player instance
@@ -241,10 +257,18 @@ exports.startMflServer = function (server, desiredGrid) {
 
       socket.on('userIsReady', function (infos) {
         // Log player, bind events and notify everyone
-        if (_gameState == enums.ServerState.WaitingForPlayers)
-          playerLog(socket, infos.nick, infos.monster);
-        else // Notify game has started
-          socket.disconnect('game_already_started');
+        playerLog(socket, infos.nick, infos.monster);
+
+        // If the player joined during a game, send them the history
+        if (_gameState == enums.ServerState.OnGame) {
+          socket.emit("grid_event", { grid: _gridManager.getGrid(), timer: 0 });
+          _foundWords.forEach(event => {
+            socket.emit("word_founded", event);
+          });
+          _scoreUpdates.forEach(scoreUpdate => {
+            socket.emit("score_update", scoreUpdate);
+          });
+        }
       });
 
       socket.on('chat', function (message) {
@@ -270,7 +294,7 @@ exports.startMflServer = function (server, desiredGrid) {
     }
 
   });
-  
+
 
   // Set game state and print ready message
   _gameState = enums.ServerState.WaitingForPlayers;
