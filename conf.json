@@ -1,7 +1,7 @@
 {
   "SERVER_PORT":  80,
 
-  "SOCKET_ADDR":  "http://127.0.0.1",
+  "SOCKET_ADDR":  "https://mots-server.herokuapp.com/",
   "SOCKET_PORT":  1337,
 
   "GRID_PROVIDER": {
