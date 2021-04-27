@@ -538,6 +538,7 @@ html, body {
 .bloc6 { width: 16%; }
 .bloc7 { width: 14%; }
 .bloc8 { width: 12%; }
+.bloc9 { width: 11%; }
 
 .bloc1 > .score-bar, .bloc2 > .score-bar { width: 50%; left: 25%; }
 .bloc3 > .score-bar { width: 66%; left: 17%; }
@@ -546,6 +547,7 @@ html, body {
 .bloc6 > .score-bar { width: 92%; left: 4%; }
 .bloc7 > .score-bar { width: 94%; left: 3%; }
 .bloc8 > .score-bar { width: 96%; left: 2%; }
+.bloc9 > .score-bar { width: 98%; left: 1%; }
 
 
 .score-bar {
