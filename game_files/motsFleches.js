@@ -20,8 +20,15 @@ var _playersManager,
     _lastWordFoudTimestamp;
 
 function startGame() {
-  var Grid  = _gridManager.getGrid(),
-      delay;
+
+  var Grid;
+  var delay;
+
+  try {
+    Grid = _gridManager.getGrid();
+  } catch (error) {
+    console.error('\t[ERROR]: No grid loaded');
+  }
 
   delay = (_playersManager.getNumberOfPlayers() > 1) ? TIME_BEFORE_START : 0;
 
