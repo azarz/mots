@@ -102,7 +102,7 @@ html, body {
 
 .lp-case {
   display: inline-block;
-  
+
   text-align: center;
   color: #2f2526;
 
@@ -129,13 +129,13 @@ html, body {
 }
 #lp-nick {
   display: inline-block;
-  
+
   width: 200px;
   margin-bottom: 35px;
-  
+
   border: 0;
   border-bottom: 4px solid gray;
-  
+
   font-size: 28px;
   color: #ecf0f1;
   text-align: center;
@@ -245,7 +245,7 @@ html, body {
   height: calc(100% - 80px);
 
   color: #2c3e50;
-  
+
   overflow-y: auto;
 }
 #gsc-messages article {
@@ -259,7 +259,7 @@ html, body {
 #gsc-write {
   position: absolute;
   bottom: 0;
-  
+
   padding: 8px;
 
   /*width: 94%;*/
@@ -365,7 +365,7 @@ html, body {
     position: relative;
 
     float: left;
-    
+
     width: -webkit-calc(100% - 900px);
     width: -moz-calc(100% - 900px);
     width: calc(100% - 900px);
@@ -375,7 +375,7 @@ html, body {
     position: relative;
 
     float: left;
-    
+
     width: -webkit-calc(100% - 900px) !important;
     width: -moz-calc(100% - 900px) !important;
     width: calc(100% - 900px) !important;
@@ -422,11 +422,11 @@ html, body {
 }
 
 /* Letter animation */
-.reveal0 { 
+.reveal0 {
   -webkit-transform: rotateY(360deg);
   transform: rotateY(360deg);
 }
-.reveal1 { 
+.reveal1 {
   -webkit-transform: rotateX(360deg);
   transform: rotateX(360deg);
 }
@@ -497,22 +497,22 @@ html, body {
 .goRight:before {
   position: absolute;
   right: -0.2em;
-  
+
   content: "\e605";
   font-family: 'icomoon';
   font-size: 0.7em;
-  
+
   opacity: 0.4;
 }
 .goDown:before {
   position: absolute;
   bottom: -0.8em;
   left: 31%;
-  
+
   content: "\e604";
   font-family: 'icomoon';
   font-size: 0.7em;
-  
+
   opacity: 0.4;
 }
 
@@ -534,10 +534,18 @@ html, body {
 .bloc1, .bloc2 { width: 50%; }
 .bloc3 { width: 33%; }
 .bloc4 { width: 25%; }
+.bloc5 { width: 20%; }
+.bloc6 { width: 16%; }
+.bloc7 { width: 14%; }
+.bloc8 { width: 12%; }
 
 .bloc1 > .score-bar, .bloc2 > .score-bar { width: 50%; left: 25%; }
 .bloc3 > .score-bar { width: 66%; left: 17%; }
 .bloc4 > .score-bar { width: 90%; left: 5%; }
+.bloc5 > .score-bar { width: 90%; left: 5%; }
+.bloc6 > .score-bar { width: 92%; left: 4%; }
+.bloc7 > .score-bar { width: 94%; left: 3%; }
+.bloc8 > .score-bar { width: 96%; left: 2%; }
 
 
 .score-bar {
@@ -595,11 +603,11 @@ html, body {
   position: absolute;
   left: 0;
   bottom: 70px;
-  
+
   width: 100%;
-  
+
   color: #ecf0f1;
-  
+
   font-size: 1.05em;
   text-shadow: 1px 1px 3px rgb(93, 180, 89);
   font-weight: bold;
@@ -664,7 +672,7 @@ html, body {
 #ig-infos > header {
   position: relative;
   height: 50%;
-  
+
   font-size: 1.3em;
   line-height: 75px;
 
@@ -697,11 +705,11 @@ html, body {
 #winner-pic {
   display: inline-block;
   margin-bottom: -100px;
-  
+
   width: 80px;
-  
+
   border-radius: 50%;
-  
+
   -moz-box-shadow: 0px 2px 10px 0px rgba(127, 140, 141, 0.5);
   box-shadow: 0px 2px 10px 0px rgba(127, 140, 141, 0.5);
 
