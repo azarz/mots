@@ -30,6 +30,7 @@ function DescriptionCase(Position, Content) {
   this.type = enums.CaseType.Description;
 
   this.isThemed = false;
+  this.themed = [];
 
   // If the content letter is a letter greater than 'd', we will have a frame with 2 descriptions inside
   this.nbDesc = (Content > 'd') ? 2 : 1;
@@ -72,10 +73,11 @@ DescriptionCase.prototype.setDescription = function (description) {
     desc = description.replace(/\n/gi, '<br/>');
 
     this.nbLines += description.split('\n').length - 1;
-    this.desc[0] = desc;
     if (desc[0] === "%") {
       this.isThemed = true;
+      this.themed.push(0);
     }
+    this.desc[0] = desc.replace("%","");
     return (true);
   }
   // Else check if the second one is available
@@ -84,10 +86,11 @@ DescriptionCase.prototype.setDescription = function (description) {
     desc = description.replace(/\n/gi, '<br/>');
 
     this.nbLines += description.split('\n').length - 1;
-    this.desc[1] = desc;
     if (desc[0] === "%") {
       this.isThemed = true;
+      this.themed.push(1);
     }
+    this.desc[1] = desc.replace("%","");
     return (true);
   }
   else

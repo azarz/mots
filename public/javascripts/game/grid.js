@@ -40,11 +40,8 @@ define(['cursor'], function (Cursor) {
         descNode;
 
     // Set class
-    if (info.isThemed) {
-      frame.className = 'frame description themedDescription frame' + info.pos;
-    } else {
-      frame.className = 'frame description frame' + info.pos;
-    }
+    frame.className = 'frame description frame' + info.pos;
+
     // Set size
     frame.style.width = size + 'px';
     frame.style.height = size + 'px';
@@ -96,7 +93,11 @@ define(['cursor'], function (Cursor) {
 
       // Insert description and arrow
       descNode.innerHTML = info.desc[i];
-      descNode.classList.add('arrow' + info.arrow[i].toString());
+      if (info.isThemed && i in info.themed) {
+        descNode.classList.add('themedDescription arrow' + info.arrow[i].toString();
+      } else {
+        descNode.classList.add('arrow' + info.arrow[i].toString());
+      }
 
       frame.appendChild(descNode);
     };
