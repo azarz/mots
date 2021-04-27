@@ -14,8 +14,10 @@ var express = require('express'),
     _gridNumber = 0;
 
 
+const PORT = process.env.PORT || 3000
+
 // all environments
-app.set('port', config.SERVER_PORT);
+app.set('port', PORT);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -60,11 +62,11 @@ server.listen(app.get('port'), onServerReady);
 async function onServerReady() {
   console.log('Express server listening on port ' + app.get('port'));
 
-  console.log(`\n\n\tWaiting for players at ${config.SOCKET_ADDR}:${config.SERVER_PORT}\n\n`);
+  console.log(`\n\n\tWaiting for players at ${config.SOCKET_ADDR}:${PORT}\n\n`);
 
   // Load desired grid in parameter.
   // -1 to retreive the day grid, 0 for the default one or any number for a special one
-  
+
 }
 
 /** Get local ip addresses */
