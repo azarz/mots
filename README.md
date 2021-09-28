@@ -12,10 +12,12 @@ Finit les parties à 4 autour d'un bureau à dicter vos mots à votre collègue.
 
 ## Mon fork :
 
-- Limite de joueurs augmentée à 8 !
+- Limite de joueurs augmentée à 9 !
 - Utilise les grilles 20 minutes (https://github.com/tcoupin/mots)
 - Permet de rejoindre en cours de partie (https://github.com/Drestin/mots)
 - Optimisé pour heroku (https://mots-server.herokuapp.com/)
+- Gestion des grilles à thème
+- Fixes permettant de récupérer plus de grilles issues de 20 minutes.
 
 
 ## Comment jouer ?
