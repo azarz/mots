@@ -232,7 +232,7 @@ function getGridAddress(commandArgv) {
     case -1:
       console.info('\n\t[GRIDMANAGER] Load day grid');
       today = new Date();
-      firstDay = new Date(2015, 0, 1);
+      firstDay = new Date(2021, 0, 1);
       randomDate = new Date(firstDay.getTime() + Math.random() * (today.getTime() - firstDay.getTime()));
       gridNumber = ("0"+randomDate.getDate()).substr(-2) + ("0"+(randomDate.getMonth()+1)).substr(-2) + (""+randomDate.getFullYear()).substr(-2)
       break;
@@ -373,10 +373,9 @@ GridManager.prototype.getAccomplishmentRate = function (playerPoints, nbPlayers)
 */
 GridManager.prototype.retreiveAndParseGrid = function (gridNumber, callback) {
   var gridAddr = getGridAddress(gridNumber),    // Retreive the grid URL, build from provider infos and ID requested
-      req = https.get(gridAddr, function (res) { // Launch the request !
+  req = https.get(gridAddr, function (res) { // Launch the request !
 
     var bodyChunks = [];
-
     console.info('\n\t[GRIDMANAGER] Try to load ' + gridAddr);
 
     // If an error occurs, raise failure callback
@@ -402,7 +401,6 @@ GridManager.prototype.retreiveAndParseGrid = function (gridNumber, callback) {
       });
       return true;
     }
-
   });
 
   req.on('error', function (e) {
