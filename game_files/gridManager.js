@@ -372,8 +372,9 @@ GridManager.prototype.getAccomplishmentRate = function (playerPoints, nbPlayers)
 * @param {Function} callback      The callback to raise either on success or error !
 */
 GridManager.prototype.retreiveAndParseGrid = function (gridNumber, callback) {
-  var gridAddr = getGridAddress(gridNumber),    // Retreive the grid URL, build from provider infos and ID requested
-  req = https.get(gridAddr, function (res) { // Launch the request !
+  var gridAddr = getGridAddress(gridNumber);    // Retreive the grid URL, build from provider infos and ID requested
+  console.log(gridAddr);
+  var req = https.get(gridAddr, function (res) { // Launch the request !
 
     var bodyChunks = [];
     console.info('\n\t[GRIDMANAGER] Try to load ' + gridAddr);

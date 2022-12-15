@@ -70,30 +70,23 @@ function playerLog (socket, nick, monsterId) {
   var gridInfos = _gridManager.getGridInfos();
 
   // Retreive PlayerInstance
-  socket.get('PlayerInstance', function (error, player) {
+  var player = socket.PlayerInstance;
+  // Set new player parameters
+  player.setNick(nick);
+  _playersManager.setMonsterToPlayer(player, monsterId);
+  // Refresh monster list for unready players
+  _io.sockets.emit('logos', _playersManager.getAvailableMonsters());
 
-    if (error)
-      console.error(error);
-    else {
-
-      // Set new player parameters
-      player.setNick(nick);
-      _playersManager.setMonsterToPlayer(player, monsterId);
-      // Refresh monster list for unready players
-      _io.sockets.emit('logos', _playersManager.getAvailableMonsters());
-
-      // Bind found word event
-      socket.on('wordValidation', function (wordObj) {
-        checkWord(player, wordObj);
-      });
-
-      // Notify everyone about the new client
-      sendChatMessage( nick + ' a rejoint la partie !<br/>' + _playersManager.getNumberOfPlayers() + ' joueurs connectés', undefined, undefined, _playersManager.getPlayerList());
-
-      // Send grid informations to the player
-      sendPlayerMessage(socket, 'Grille actuelle: ' + gridInfos.provider + ' ' + gridInfos.id + ' (Niveau ' + gridInfos.level + ')');
-    }
+  // Bind found word event
+  socket.on('wordValidation', function (wordObj) {
+    checkWord(player, wordObj);
   });
+
+  // Notify everyone about the new client
+  sendChatMessage( nick + ' a rejoint la partie !<br/>' + _playersManager.getNumberOfPlayers() + ' joueurs connectés', undefined, undefined, _playersManager.getPlayerList());
+
+  // Send grid informations to the player
+  sendPlayerMessage(socket, 'Grille actuelle: ' + gridInfos.provider + ' ' + gridInfos.id + ' (Niveau ' + gridInfos.level + ')');
 }
 
 function bonusChecker(playerPoints, nbWordsRemaining) {
@@ -222,10 +215,7 @@ function sendPlayerMessage(socket, Message) {
  */
 exports.startMflServer = function (server, desiredGrid) {
   // Instanciiate io module with proper parameters
-  _io = require('socket.io').listen(server);
-  _io.configure(function(){
-    _io.set('log level', 2);
-  });
+  _io = require('socket.io')(server);
 
   // Retreive the grid
   _gridManager = new GridManager();
@@ -244,8 +234,7 @@ exports.startMflServer = function (server, desiredGrid) {
 
 
   // On new client connection
-  _io.sockets.on('connection', function (socket) {
-
+  _io.on('connection', function (socket) {
     // If it remains slots in the room, add player and bind events
     if (_playersManager.getNumberOfPlayers() < MAX_PLAYERS) {
 
@@ -255,12 +244,10 @@ exports.startMflServer = function (server, desiredGrid) {
       // Register to socket events
       socket.on('disconnect', function () {
         // When a player disconnect, retreive player instance
-        socket.get('PlayerInstance', function (error, player) {
-          sendChatMessage( player.getNick() + ' a quitté la partie');
-          _playersManager.removePlayer(player);
-          player = null;
-        });
-
+        var player = socket.PlayerInstance
+        sendChatMessage( player.getNick() + ' a quitté la partie');
+        _playersManager.removePlayer(player);
+        player = null;
       });
 
       socket.on('userIsReady', function (infos) {
@@ -284,14 +271,12 @@ exports.startMflServer = function (server, desiredGrid) {
         // If it's a message for the server, treat it
         // Else broadcast the message to everyone
         if (checkServerCommand(message) == false) {
-          socket.get('PlayerInstance', function (error, player) {
-            sendChatMessage(message, player.getNick(), player.getColor());
-          });
+          sendChatMessage(message, socket.PlayerInstance.getNick(), socket.PlayerInstance.getColor());
         }
       });
 
       // Remember PlayerInstance and push it to the player list
-      socket.set('PlayerInstance', player);
+      socket.PlayerInstance= player;
 
       // Send to the player availables logos
       socket.emit('logos', _playersManager.getAvailableMonsters());

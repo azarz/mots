@@ -1,7 +1,6 @@
 var util          = require('util'),
     EventEmitter  = require('events').EventEmitter,
     Player        = require('./player'),
-    enums         = require('./enums'),
     Monsters      = require('./playersLogos').Monsters;
 
 var _playersList      = []

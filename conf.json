@@ -1,5 +1,5 @@
 {
-  "SOCKET_ADDR":  "https://mots.onrender.com/",
+  "SOCKET_ADDR":  "localhost",
   "SOCKET_PORT":  1337,
 
   "GRID_PROVIDER": {
