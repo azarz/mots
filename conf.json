@@ -1,5 +1,5 @@
 {
-  "SOCKET_ADDR":  "https://mots-server.herokuapp.com/",
+  "SOCKET_ADDR":  "https://mots.onrender.com/",
   "SOCKET_PORT":  1337,
 
   "GRID_PROVIDER": {
