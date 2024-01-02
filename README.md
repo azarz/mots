@@ -2,11 +2,11 @@ Mots.js
 ====
 
 Un jeu de mots fléchés multijoueur basé sur Node.js !
-Les grilles sont récupérés chez Metro. Vous pouvez choisir de lancer la grille du jour ou jouer sur la grille de votre choix.
+Les grilles sont récupérés chez 20 minutes. Vous pouvez choisir de lancer une grille au hasard ou jouer sur la grille de votre choix.
 
 ![](./illustrations/mots-details1.png)
 
-Finit les parties à 4 autour d'un bureau à dicter vos mots à votre collègue. Vous trouvez tout les mots ? Vous êtes le meilleur ? Prouvez le !
+Fini les parties à 4 autour d'un bureau à dicter vos mots à votre collègue. Vous trouvez tout les mots ? Vous êtes le meilleur ? Prouvez le !
 
 ![](./illustrations/mots-details2.png)
 
@@ -18,6 +18,8 @@ Finit les parties à 4 autour d'un bureau à dicter vos mots à votre collègue.
 - Optimisé pour render (https://mots.onrender.com)
 - Gestion des grilles à thème
 - Fixes permettant de récupérer plus de grilles issues de 20 minutes.
+- Support mobile et tablette
+- Détection automatique d'un mot en ligne ou colonne
 
 
 ## Comment jouer ?
@@ -40,7 +42,7 @@ Pour forcer le chargement d'une grille, rajouter son numéro à la fin de votre 
 
 ## Crédits
 
-Les images des "petits monstres" utilisées dans le projet ont été réalisées par le talentuex [Buatoom](https://dribbble.com/buatoom)
+Les images des "petits monstres" utilisées dans le projet ont été réalisées par le talentueux [Buatoom](https://dribbble.com/buatoom)
 
 
 ## Notes

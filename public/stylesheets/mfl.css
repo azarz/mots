@@ -498,26 +498,15 @@ html, body {
 
   border-color: rgba(231,166,26,0.4);
 }
-.goRight:before {
-  position: absolute;
-  right: -0.2em;
-
-  content: "\e605";
-  font-family: 'icomoon';
-  font-size: 0.7em;
-
-  opacity: 0.4;
+.goRight {
+  background-image: url("chevron_right.svg");
+  background-repeat: no-repeat;
+  background-position: 35px 15px;
 }
-.goDown:before {
-  position: absolute;
-  bottom: -0.8em;
-  left: 31%;
-
-  content: "\e604";
-  font-family: 'icomoon';
-  font-size: 0.7em;
-
-  opacity: 0.4;
+.goDown {
+  background-image: url("chevron_bottom.svg");
+  background-repeat: no-repeat;
+  background-position: 15px 35px;
 }
 
 

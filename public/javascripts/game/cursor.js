@@ -16,7 +16,7 @@ define(function () {
       _nbCols,
       _focusCell = null;
       _focusDirection = null;
-  
+
   /*
   *   Constructor
   *   @param: {Object}    gridObj               Grid instance given by the server
@@ -34,9 +34,9 @@ define(function () {
 
 
   /*-------------------------
-      
+
       Private functions
-  
+
   -------------------------*/
 
   /*
@@ -112,6 +112,7 @@ define(function () {
       // Focus new frame
       _focusCell = document.querySelector('.frame' + index);
       _focusCell.classList.add('focusCell');
+      _focusCell.focus();
       if (direction == enumDirections.Left || direction == enumDirections.Right) {
         _focusDirection = enumDirections.Right;
         _focusCell.classList.add('goRight');
@@ -146,12 +147,21 @@ define(function () {
     _focusCell.classList.add('focusCell');
     _focusCell.classList.add('goRight');
     _focusDirection = enumDirections.Right;
+    if (event.target.nextSibling.tagName !== "INPUT" && event.target.previousSibling.tagName !== "INPUT") {
+      setCursorDirection();
+    }
+    else if (event.target.previousSibling.tagName == "INPUT" && event.target.previousSibling.dataset.line == event.target.dataset.line) {
+      if (event.target.previousSibling.value == "") {
+        setCursorDirection();
+      }
+    }
   }
 
   /*
   * When a letter is pressed on the grid
   */
   function onLetterPressed(event) {
+    event.preventDefault();
     var key = event.keyCode;
 
     // If a letter is pressed
@@ -181,8 +191,8 @@ define(function () {
 
     // Print letter on grid if we can
     if ((_focusCell != null) && (_grid[pos].available == true)) {
-      _focusCell.innerHTML = character;
-    
+      _focusCell.value = character;
+
       // Notify grid that a new letter is inserted
       _letterUpdateCallback(pos, character);
     }
@@ -195,8 +205,8 @@ define(function () {
     var pos = parseInt(_focusCell.getAttribute('data-pos'));
 
     if (_grid[pos].available == true) {
-      _focusCell.innerHTML = '';
-      
+      _focusCell.value = '';
+
       // Notify grid that the letter has been removed
       _letterUpdateCallback(parseInt(_focusCell.getAttribute('data-pos')), null);
     }
@@ -205,9 +215,9 @@ define(function () {
 
 
   /*-------------------------
-      
+
       Public methods
-  
+
   -------------------------*/
 
   /*
@@ -231,5 +241,5 @@ define(function () {
 
 
   return (Cursor);
-  
+
 });

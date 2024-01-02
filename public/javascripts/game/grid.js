@@ -105,7 +105,8 @@ define(['cursor'], function (Cursor) {
   }
 
   function insertLetter(line, column, size, info, index) {
-    var frame = document.createElement('div');
+    var frame = document.createElement('input');
+    frame.type = "text";
 
     // Set class
     frame.className = 'frame letter frame' + info.pos;
